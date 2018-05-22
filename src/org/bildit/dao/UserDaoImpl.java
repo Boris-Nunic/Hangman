@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +27,7 @@ public class UserDaoImpl implements UserDaoInterface {
 
 			ps.setString(1, username);
 			ps.setString(2, password);
-			ps.setInt(3, 0);
+			ps.setInt(3, 0); // set score to 0 for every new user
 			ps.setInt(4, 0); // tiny int in db, 0 for regular user
 
 			ps.executeUpdate();
@@ -41,39 +40,17 @@ public class UserDaoImpl implements UserDaoInterface {
 
 	@Override
 	public void editUser(User user) throws SQLException {
-		String query = " UPDATE hangman_user SET userName = ?, score = ?, isAdmin = ? WHERE userName = ?";
+		String query = " UPDATE hangman_user SET userName = ?, password = ? WHERE userName = ?";
 
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, user.getUserName());
-			ps.setInt(2, user.getScore());
-			ps.setInt(3, user.getIsAdmin());
+			ps.setString(2, user.getPassword());
 
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
-	}
-
-	@Override
-	public ArrayList<String> getUsernames() throws SQLException {
-
-		String query = "SELECT * FROM hangman_user";
-		ResultSet rs = null;
-		ArrayList<String> userNames = new ArrayList<>();
-
-		try (Statement statement = conn.createStatement();) {
-
-			rs = statement.executeQuery(query);
-
-			while (rs.next()) { // while table contains some data
-				userNames.add(rs.getString("userName"));
-			}
-
-		} catch (SQLException e) {
-			System.err.println(e);
-		}
-		return userNames;
 	}
 
 	@Override
@@ -95,17 +72,17 @@ public class UserDaoImpl implements UserDaoInterface {
 	}
 
 	@Override
-	public Map<Integer, String> getLeaderboard() throws SQLException {
+	public Map<String, Integer> getLeaderboard() throws SQLException {
 		String query = "SELECT * FROM hangman_user";
 		ResultSet rs = null;
 
-		Map<Integer, String> lb = new HashMap<>();
+		Map<String, Integer> lb = new HashMap<>();
 
 		try (Statement statement = conn.createStatement();) {
 			rs = statement.executeQuery(query);
 
 			while (rs.next()) { // while table contains some data
-				lb.put(rs.getInt("score"), rs.getString("userName"));
+				lb.put(rs.getString("userName"), rs.getInt("score"));
 			}
 		} catch (SQLException e) {
 			System.err.println(e);
@@ -115,14 +92,60 @@ public class UserDaoImpl implements UserDaoInterface {
 
 	@Override
 	public void resetLeaderboard() throws SQLException {
-		Map<Integer, String> lb = getLeaderboard();
+		String query = "SELECT * FROM hangman_user";
+		ResultSet rs = null;
 
-		if (!lb.isEmpty()) {
-			lb.clear();
-			System.out.println("Leaderbord reseted.");
-		}else
-			System.out.println("");
-		
+		Map<String, Integer> lb = new HashMap<>();
+
+		try (Statement statement = conn.createStatement();) {
+			rs = statement.executeQuery(query);
+
+			while (rs.next()) { // while table contains some data
+				// set all scores to 0
+				lb.put(rs.getString("userName"), 0);
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
 	}
 
+	@Override
+	public void addScore(String username, int score) throws SQLException {
+
+		String query = "UPDATE hangman_user SET score = ? WHERE userName = ?";
+
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setInt(1, score);
+			ps.setString(2, username);
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+	}
+
+	@Override
+	public boolean validateUser(String username, String password) throws SQLException {
+
+		boolean valid = false;
+		String query = "SELECT * FROM hangman_user";
+		ResultSet rs = null;
+
+		try (Statement statement = conn.createStatement();) {
+			rs = statement.executeQuery(query);
+
+			while (rs.next()) { // while table contains some data
+
+				if (username.equalsIgnoreCase(rs.getString("userName"))
+						&& password.equalsIgnoreCase(rs.getString("password"))) {
+
+					valid = true;
+				}
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return valid;
+	}
 }

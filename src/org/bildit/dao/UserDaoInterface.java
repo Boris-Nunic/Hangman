@@ -1,11 +1,8 @@
 package org.bildit.dao;
-
  
-import java.util.ArrayList;
 import java.sql.SQLException;
 import java.util.Map;
 import org.bildit.beans.User;
-
 
 public interface UserDaoInterface {
 
