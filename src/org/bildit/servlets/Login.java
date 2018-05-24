@@ -1,16 +1,13 @@
 package org.bildit.servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.bildit.dao.UserDao;
+import org.bildit.services.LoginService;
 
 /**
  * Servlet implementation class Login
@@ -30,18 +27,10 @@ public class Login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		// Validate user
-		UserDao dao = new UserDao();
-		boolean isValidUser = false;
-		try {
-			isValidUser = dao.validateUser(username, password);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		// Check if user is valid and setup an error message
-		if (isValidUser) {
+		String message = LoginService.validateLogin(username, password);
+		if (message == null) {
 
 			// Set HTTP session
 			HttpSession session = request.getSession();
@@ -54,7 +43,6 @@ public class Login extends HttpServlet {
 		}
 		
 		else {
-			String message = "Username or password is wrong. Please try again";
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("html/placeholder.jsp").forward(request, response);
 		}
