@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDaoInterface {
 	@Override
 	public boolean addUser(String username, String password) throws SQLException {
 		boolean added = false;
-		String query = "INSERT INTO hangman_user( userName, password, score) " + "VALUES (?, ?, ?)";
+		String query = "INSERT INTO hangman_user( userName, password, score, isAdmin) " + "VALUES (?, ?, ?, default)";
 
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
@@ -178,22 +178,22 @@ public class UserDaoImpl implements UserDaoInterface {
 	}
 
 	@Override
-	public ArrayList<Integer> getScores() throws SQLException {
+	public ArrayList<User> getUsersSortedByScore() throws SQLException {
 
-		ArrayList<Integer> list = new ArrayList<>();
-		String query = "SELECT * FROM hangman_user";
+		ArrayList<User> list = new ArrayList<>();
+		String query = "SELECT * FROM hangman_user ORDER BY score DESC";
 		ResultSet rs = null;
+		
 		try (Statement st = conn.createStatement()) {
 			rs = st.executeQuery(query);
 
 			while (rs.next()) {
-				list.add(rs.getInt("score"));
+				list.add(new User(rs.getString("userName"), rs.getInt("score")));
 			}
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
 		return list;
-
 	}
 
 	@Override
@@ -207,7 +207,6 @@ public class UserDaoImpl implements UserDaoInterface {
 				;
 			unique = true;
 		}
-
 		return unique;
 	}
 
@@ -215,19 +214,29 @@ public class UserDaoImpl implements UserDaoInterface {
 	public User getUser(String username) throws SQLException {
 
 		User user = null;
-		String query = "SELECT FROM hangman WHERE useName = ?";
+		String query = "SELECT * FROM hangman_user WHERE userName = ?";
 		ResultSet rs = null;
 
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
-			ps.setString(1, "userName");
+			ps.setString(1, username);
 
 			rs = ps.executeQuery();
-			user = new User(rs.getString("userName"), rs.getString("password"), rs.getInt("score"));
 
+			if (rs.next()) {
+				user = new User(rs.getString("userName"), rs.getString("password"), rs.getInt("score"));
+			}
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
 		return user;
+
 	}
 
+	public void printUser(User user) {
+		if (user != null) {
+			System.out.println("username: " + user.getUserName() + ", score: " + user.getScore());
+		} else {
+			System.out.println("No user to print.");
+		}
+	}
 }

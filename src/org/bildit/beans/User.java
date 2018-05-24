@@ -5,6 +5,7 @@ public class User {
 	private String userName;
 	private String password;
 	private boolean isOnline;
+	private boolean isAdmin;
 
 	public User() {
 
@@ -17,7 +18,11 @@ public class User {
 
 	public User(String userName, String password, int score) {
 		this.userName = userName;
-		this.password = password;
+		this.score = score;
+	}
+	
+	public User(String userName, int score) {
+		this.userName = userName;
 		this.score = score;
 	}
 
@@ -55,6 +60,14 @@ public class User {
 
 	public void logout() {
 		this.isOnline = false;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void isAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 }

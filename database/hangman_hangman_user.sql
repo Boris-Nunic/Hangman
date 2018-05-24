@@ -23,15 +23,11 @@ DROP TABLE IF EXISTS `hangman_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hangman_user` (
-  `userID` int(11) NOT NULL AUTO_INCREMENT,
-  `userName` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `score` int(11) NOT NULL,
-  `isAdmin` tinyint(2) NOT NULL,
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `userName_UNIQUE` (`userName`),
-  UNIQUE KEY `password_UNIQUE` (`password`),
-  UNIQUE KEY `userID_UNIQUE` (`userID`)
+  `score` int(11) DEFAULT NULL,
+  `isAdmin` tinyint(1) NOT NULL,
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-22  1:36:58
+-- Dump completed on 2018-05-24 13:02:45
