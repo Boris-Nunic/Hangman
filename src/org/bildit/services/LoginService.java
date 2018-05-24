@@ -6,22 +6,34 @@ import org.bildit.dao.UserDao;
 public class LoginService {
 
 	private static UserDao dao = new UserDao();
-	
-	public static String validateLogin(String username, String password) {
-		User user = dao.getUser(username);
+
+	public static User validateLogin(String username, String password) {
+		User user = new User();
+		String message = null;
 		String encrypt = EncryptionService.hashPassword(password);
 		if (encrypt == null) {
-			return "An error has occured. Please try again";
+			message = "An error has occured. Please try again";
+			user.setLoginMessage(message);
+			return user;
 		}
-		else if (user == null) {
-			return "Username is wrong. Please try again";
+		
+		if (dao.getUser(username) == null) {
+			message = "Username is wrong. Please try again";
+			user.setLoginMessage(message);
+			return user;
 		}
-		else if (!encrypt.equals(user.getPassword())) {
-			return "Incorrect password. Please try again";
+		
+		user = dao.getUser(username);
+		
+		if (!encrypt.equals(user.getPassword())) {
+			message = "Incorrect password. Please try again";
+			user.setLoginMessage(message);
+			return user;
 		}
-		else {
-			user.login();
-			return null;
-		}
+
+		user.login();
+		message = "Login was successful";
+		user.setLoginMessage(message);
+		return user;
 	}
 }

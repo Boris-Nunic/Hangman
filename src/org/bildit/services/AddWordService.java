@@ -2,16 +2,17 @@ package org.bildit.services;
 
 import java.util.ArrayList;
 
-import org.bildit.dao.UserDao;
 import org.bildit.dao.WordsDao;
-import org.bildit.dao.WordsDaoInteface;
 
 public class AddWordService {
-
-	private static WordsDao dao = new WordsDao();
 	
 	public static String AddNewWord(String word) {
+		WordsDao dao = new WordsDao();
 		ArrayList<String> words = dao.getWords();
-		
+		if (words.contains(word)) {
+			return"\"" + word + "\" is already in database";
+		}
+		dao.addWord(word);
+		return "\"" + word + "\" is successfully added in database";
 	}
 }

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bildit.beans.User;
-import org.bildit.dao.UserDao;
+import org.bildit.services.LeaderboardService;
 
 /**
  * Servlet implementation class Leaderboard
@@ -24,11 +24,9 @@ public class Leaderboard extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Get leaderboard from dao
-		UserDao dao = new UserDao();
-		ArrayList<User> leaderboard = dao.getUsers();
+		ArrayList<User> leaderboard = LeaderboardService.getLeaderboard();
 
-		// Write the leaderboard back to client browser
+		// Write the top 10 leader board back to client browser
 		request.setAttribute("leaderboard", leaderboard);
 		request.getRequestDispatcher("html/placeholder.jsp");
 	}
