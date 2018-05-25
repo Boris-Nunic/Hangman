@@ -21,8 +21,6 @@ public interface UserDaoInterface {
 	
 	public boolean addScore(String username, int score) throws SQLException;
 	
-	public ArrayList<String> getUsernames() throws SQLException;
-	
 	public ArrayList<User> getUsersSortedByScore() throws SQLException;
 		
 	public ArrayList<String> getUsernames() throws SQLException; 
