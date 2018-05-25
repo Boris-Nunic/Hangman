@@ -26,5 +26,6 @@ public interface UserDaoInterface {
 	
 	public ArrayList<String> getUsernames() throws SQLException; 
 	
+	public ArrayList<User> getUsersSortedByScore() throws SQLException;
 	
 }
