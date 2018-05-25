@@ -5,7 +5,7 @@ import org.bildit.beans.User;
 
 public interface UserDaoInterface {
 
-	public boolean addUser(String username, String password);
+	public boolean addUser(User user);
 	
 	public boolean editUser(User user);
 	

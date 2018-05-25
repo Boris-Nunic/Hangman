@@ -16,14 +16,14 @@ public class UserDao implements UserDaoInterface {
 	private static Connection conn = ConnectionManager.getInstance().getConnection();
 
 	@Override
-	public boolean addUser(String username, String password){
+	public boolean addUser(User user){
 		boolean added = false;
 		String query = "INSERT INTO hangman_user( userName, password, score, isAdmin) " + "VALUES (?, ?, ?, default)";
 
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
-			ps.setString(1, username);
-			ps.setString(2, password);
+			ps.setString(1, user.getUserName());
+			ps.setString(2, user.getPassword());
 			ps.setInt(3, 0); // set score to 0 for every new user
 			// ps.setInt(4, 0); // tiny int in db, 0 for regular user
 			// execute the query
