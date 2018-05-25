@@ -67,6 +67,7 @@ public class UserDaoImpl implements UserDaoInterface {
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
 			ps.setString(1, username);
+			
 			int affected = ps.executeUpdate();
 			if (affected == 1) {
 				deleted = true;

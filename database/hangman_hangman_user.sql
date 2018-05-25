@@ -25,8 +25,8 @@ DROP TABLE IF EXISTS `hangman_user`;
 CREATE TABLE `hangman_user` (
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `score` int(11) DEFAULT NULL,
-  `isAdmin` tinyint(1) NOT NULL,
+  `score` int(11) NOT NULL,
+  `isAdmin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-24 13:02:45
+-- Dump completed on 2018-05-25  9:49:53

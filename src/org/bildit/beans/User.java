@@ -6,6 +6,7 @@ public class User {
 	private String password;
 	private boolean isOnline;
 	private boolean isAdmin;
+	private String message;
 
 	public User() {
 
@@ -68,6 +69,14 @@ public class User {
 
 	public void isAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }
