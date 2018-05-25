@@ -24,9 +24,8 @@ public interface UserDaoInterface {
 	public ArrayList<String> getUsernames() throws SQLException;
 	
 	public ArrayList<User> getUsersSortedByScore() throws SQLException;
-	
-	
-	public boolean isUniqueUsername(String username) throws SQLException;
+		
+	public ArrayList<String> getUsernames() throws SQLException; 
 	
 	public User getUser(String username) throws SQLException;
 	
