@@ -11,12 +11,12 @@ import java.util.Map;
 
 import org.bildit.beans.User;
 
-public class UserDaoImpl implements UserDaoInterface {
+public class UserDao implements UserDaoInterface {
 
 	private static Connection conn = ConnectionManager.getInstance().getConnection();
 
 	@Override
-	public boolean addUser(String username, String password) throws SQLException {
+	public boolean addUser(String username, String password){
 		boolean added = false;
 		String query = "INSERT INTO hangman_user( userName, password, score, isAdmin) " + "VALUES (?, ?, ?, default)";
 
@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDaoInterface {
 	}
 
 	@Override
-	public boolean editUser(User user) throws SQLException {
+	public boolean editUser(User user) {
 
 		boolean edited = false;
 		String query = " UPDATE hangman_user SET userName = ?, password = ? WHERE userName = ?";
@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDaoInterface {
 	}
 
 	@Override
-	public boolean deleteUser(String username) throws SQLException {
+	public boolean deleteUser(String username) {
 
 		boolean deleted = false;
 		String query = "DELETE FROM hangman_user WHERE userName = ?";
@@ -79,26 +79,7 @@ public class UserDaoImpl implements UserDaoInterface {
 	}
 
 	@Override
-	public Map<String, Integer> getLeaderboard() throws SQLException {
-		String query = "SELECT * FROM hangman_user";
-		ResultSet rs = null;
-
-		Map<String, Integer> lb = new HashMap<>();
-
-		try (Statement statement = conn.createStatement();) {
-			rs = statement.executeQuery(query);
-
-			while (rs.next()) { // while table contains some data
-				lb.put(rs.getString("userName"), rs.getInt("score"));
-			}
-		} catch (SQLException e) {
-			System.err.println(e);
-		}
-		return lb;
-	}
-
-	@Override
-	public void resetLeaderboard() throws SQLException {
+	public void resetLeaderboard(){
 		String query = "SELECT * FROM hangman_user";
 		ResultSet rs = null;
 
@@ -117,7 +98,7 @@ public class UserDaoImpl implements UserDaoInterface {
 	}
 
 	@Override
-	public boolean addScore(String username, int score) throws SQLException {
+	public boolean addScore(String username, int score){
 
 		boolean added = false;
 		String query = "UPDATE hangman_user SET score = ? WHERE userName = ?";
@@ -137,31 +118,7 @@ public class UserDaoImpl implements UserDaoInterface {
 	}
 
 	@Override
-	public boolean validateUser(String username, String password) throws SQLException {
-
-		boolean valid = false;
-		String query = "SELECT * FROM hangman_user";
-		ResultSet rs = null;
-
-		try (Statement statement = conn.createStatement();) {
-			rs = statement.executeQuery(query);
-
-			while (rs.next()) { // while table contains some data
-
-				if (username.equalsIgnoreCase(rs.getString("userName"))
-						&& password.equalsIgnoreCase(rs.getString("password"))) {
-
-					valid = true;
-				}
-			}
-		} catch (SQLException e) {
-			System.err.println(e);
-		}
-		return valid;
-	}
-
-	@Override
-	public ArrayList<String> getUsernames() throws SQLException {
+	public ArrayList<String> getUsernames() {
 
 		ArrayList<String> list = new ArrayList<>();
 		String query = "SELECT * FROM hangman_user";
@@ -179,7 +136,7 @@ public class UserDaoImpl implements UserDaoInterface {
 	}
 
 	@Override
-	public ArrayList<User> getUsersSortedByScore() throws SQLException {
+	public ArrayList<User> getUsersSortedByScore(){
 
 		ArrayList<User> list = new ArrayList<>();
 		String query = "SELECT * FROM hangman_user ORDER BY score DESC";
@@ -197,22 +154,9 @@ public class UserDaoImpl implements UserDaoInterface {
 		return list;
 	}
 
-	@Override
-	public boolean isUniqueUsername(String username) throws SQLException {
-
-		boolean unique = false;
-		ArrayList<String> list = getUsernames();
-
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).equalsIgnoreCase(username))
-				;
-			unique = true;
-		}
-		return unique;
-	}
 
 	@Override
-	public User getUser(String username) throws SQLException {
+	public User getUser(String username){
 
 		User user = null;
 		String query = "SELECT * FROM hangman_user WHERE userName = ?";
