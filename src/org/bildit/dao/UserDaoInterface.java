@@ -3,6 +3,7 @@ package org.bildit.dao;
  
 import java.util.ArrayList;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 import org.bildit.beans.User;
 
@@ -23,6 +24,7 @@ public interface UserDaoInterface {
 	
 	public void addScore(String username, int score) throws SQLException;
 	
+	public ArrayList<String> getUsernames() throws SQLException; 
 	
 	
 }
