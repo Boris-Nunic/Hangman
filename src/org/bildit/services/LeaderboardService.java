@@ -10,7 +10,7 @@ public class LeaderboardService {
 
 	public static ArrayList<User> getLeaderboard() {
 		UserDao dao = new UserDao();
-		ArrayList<User> leaderboard = dao.getUsers();
+		ArrayList<User> leaderboard = dao.getUsersSortedByScore();
 		final int TENTH_POSITION = 10;
 		List<User> topTen = null;
 		if (leaderboard.size() < TENTH_POSITION) {

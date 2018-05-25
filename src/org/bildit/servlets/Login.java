@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
 			// Set username as attribute
 			session.setAttribute("user", user);
 
-			if (user.getIsAdmin()) {
+			if (user.isAdmin()) {
 				// Forward to admin page
 				request.getRequestDispatcher("html/placeholder1.jsp").forward(request, response);
 			}

@@ -13,13 +13,13 @@ public class LoginService {
 		String encrypt = EncryptionService.hashPassword(password);
 		if (encrypt == null) {
 			message = "An error has occured. Please try again";
-			user.setLoginMessage(message);
+			user.setMessage(message);
 			return user;
 		}
 		
 		if (dao.getUser(username) == null) {
 			message = "Username is wrong. Please try again";
-			user.setLoginMessage(message);
+			user.setMessage(message);
 			return user;
 		}
 		
@@ -27,13 +27,13 @@ public class LoginService {
 		
 		if (!encrypt.equals(user.getPassword())) {
 			message = "Incorrect password. Please try again";
-			user.setLoginMessage(message);
+			user.setMessage(message);;
 			return user;
 		}
 
 		user.login();
 		message = "Login was successful";
-		user.setLoginMessage(message);
+		user.setMessage(message);
 		return user;
 	}
 }

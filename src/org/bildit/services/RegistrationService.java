@@ -30,8 +30,11 @@ public class RegistrationService {
 	private static String successfulRegistration(String username, String password) {
 		String encrypt = EncryptionService.hashPassword(password);
 		User user = new User(username, encrypt);
-		dao.addUser(user);
+		if(dao.addUser(user) == true) {
 		return "Your registration was successful";
+		}
+		return "Registration failed";
+		
 	}
 	
 	// Returns message if password is not valid, else returns null 
