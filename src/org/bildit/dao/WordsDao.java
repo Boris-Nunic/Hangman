@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class WordsDaoImpl implements WordsDaoInteface {
+public class WordsDao implements WordsDaoInteface {
 
 	Connection conn = ConnectionManager.getInstance().getConnection();
 
 	@Override
-	public void addWord(String word) throws SQLException {
+	public void addWord(String word) {
 		String query = "INSERT INTO hangman_words(wordID, word) " + "VALUES (default, ?)";
 		// default value - it's autoincrement in db
 
@@ -26,7 +26,7 @@ public class WordsDaoImpl implements WordsDaoInteface {
 	}
 
 	@Override
-	public void deleteWord(String word) throws SQLException {
+	public void deleteWord(String word) {
 		String query = "DELETE FROM hangman_words WHERE word= ?";
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
@@ -39,7 +39,7 @@ public class WordsDaoImpl implements WordsDaoInteface {
 	}
 
 	@Override
-	public ArrayList<String> getWords() throws SQLException {
+	public ArrayList<String> getWords() {
 		String query = "SELECT * FROM hangman_words";
 		ResultSet rs = null;
 		ArrayList<String> words = new ArrayList<>();
