@@ -16,96 +16,80 @@ public class UserDaoImpl implements UserDaoInterface {
 	private static Connection conn = ConnectionManager.getInstance().getConnection();
 
 	@Override
-	public void addUser(String username, String password) throws SQLException {
-
-		String query = "INSERT INTO hangman_user(userID, userName, password, score, isAdmin) "
-				+ "VALUES (default, ?, ?, ?, ?)"; // default value -
-													// it's
-													// autoincrement in
-													// db
+	public boolean addUser(String username, String password) throws SQLException {
+		boolean added = false;
+		String query = "INSERT INTO hangman_user( userName, password, score, isAdmin) " + "VALUES (?, ?, ?, default)";
 
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
 			ps.setString(1, username);
 			ps.setString(2, password);
-			ps.setInt(3, 0);
-			ps.setInt(4, 0); // tiny int in db, 0 for regular user
-
-			ps.executeUpdate();
+			ps.setInt(3, 0); // set score to 0 for every new user
+			// ps.setInt(4, 0); // tiny int in db, 0 for regular user
+			// execute the query
+			int affected = ps.executeUpdate();
+			if (affected == 1) {
+				added = true;
+			}
 
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
-
+		return added;
 	}
 
 	@Override
-	public void editUser(User user) throws SQLException {
-		String query = " UPDATE hangman_user SET userName = ?, score = ?, isAdmin = ? WHERE userName = ?";
+	public boolean editUser(User user) throws SQLException {
+
+		boolean edited = false;
+		String query = " UPDATE hangman_user SET userName = ?, password = ? WHERE userName = ?";
 
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, user.getUserName());
-			ps.setInt(2, user.getScore());
-			ps.setInt(3, user.getIsAdmin());
+			ps.setString(2, user.getPassword());
 
-			ps.executeUpdate();
-
+			int affected = ps.executeUpdate();
+			if (affected == 1) {
+				edited = true;
+			}
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
+		return edited;
 	}
 
 	@Override
-	public ArrayList<String> getUsernames() throws SQLException {
+	public boolean deleteUser(String username) throws SQLException {
 
-		String query = "SELECT * FROM hangman_user";
-		ResultSet rs = null;
-		ArrayList<String> userNames = new ArrayList<>();
+		boolean deleted = false;
+		String query = "DELETE FROM hangman_user WHERE userName = ?";
 
-		try (Statement statement = conn.createStatement();) {
+		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
-			rs = statement.executeQuery(query);
-
-			while (rs.next()) { // while table contains some data
-				userNames.add(rs.getString("userName"));
+			ps.setString(1, username);
+			
+			int affected = ps.executeUpdate();
+			if (affected == 1) {
+				deleted = true;
 			}
-
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
-		return userNames;
+		return deleted;
 	}
 
 	@Override
-	public void deleteUser(User user) throws SQLException {
-		if (user != null) {
-			// create an SELECT SQL query
-			String query = "DELETE FROM hangman_user WHERE userID = ?";
-
-			try (PreparedStatement ps = conn.prepareStatement(query);) {
-
-				ps.setInt(1, user.getUserID());
-
-				// execute the query
-				ps.executeUpdate();
-			} catch (SQLException e) {
-				System.err.println(e);
-			}
-		}
-	}
-
-	@Override
-	public Map<Integer, String> getLeaderboard() throws SQLException {
+	public Map<String, Integer> getLeaderboard() throws SQLException {
 		String query = "SELECT * FROM hangman_user";
 		ResultSet rs = null;
 
-		Map<Integer, String> lb = new HashMap<>();
+		Map<String, Integer> lb = new HashMap<>();
 
 		try (Statement statement = conn.createStatement();) {
 			rs = statement.executeQuery(query);
 
 			while (rs.next()) { // while table contains some data
-				lb.put(rs.getInt("score"), rs.getString("userName"));
+				lb.put(rs.getString("userName"), rs.getInt("score"));
 			}
 		} catch (SQLException e) {
 			System.err.println(e);
@@ -115,14 +99,145 @@ public class UserDaoImpl implements UserDaoInterface {
 
 	@Override
 	public void resetLeaderboard() throws SQLException {
-		Map<Integer, String> lb = getLeaderboard();
+		String query = "SELECT * FROM hangman_user";
+		ResultSet rs = null;
 
-		if (!lb.isEmpty()) {
-			lb.clear();
-			System.out.println("Leaderbord reseted.");
-		}else
-			System.out.println("");
-		
+		Map<String, Integer> lb = new HashMap<>();
+
+		try (Statement statement = conn.createStatement();) {
+			rs = statement.executeQuery(query);
+
+			while (rs.next()) { // while table contains some data
+				// set all scores to 0
+				lb.put(rs.getString("userName"), 0);
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
 	}
 
+	@Override
+	public boolean addScore(String username, int score) throws SQLException {
+
+		boolean added = false;
+		String query = "UPDATE hangman_user SET score = ? WHERE userName = ?";
+
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setInt(1, score);
+			ps.setString(2, username);
+
+			int affected = ps.executeUpdate();
+			if (affected == 1) {
+				added = true;
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return added;
+	}
+
+	@Override
+	public boolean validateUser(String username, String password) throws SQLException {
+
+		boolean valid = false;
+		String query = "SELECT * FROM hangman_user";
+		ResultSet rs = null;
+
+		try (Statement statement = conn.createStatement();) {
+			rs = statement.executeQuery(query);
+
+			while (rs.next()) { // while table contains some data
+
+				if (username.equalsIgnoreCase(rs.getString("userName"))
+						&& password.equalsIgnoreCase(rs.getString("password"))) {
+
+					valid = true;
+				}
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return valid;
+	}
+
+	@Override
+	public ArrayList<String> getUsernames() throws SQLException {
+
+		ArrayList<String> list = new ArrayList<>();
+		String query = "SELECT * FROM hangman_user";
+		ResultSet rs = null;
+		try (Statement st = conn.createStatement()) {
+			rs = st.executeQuery(query);
+
+			while (rs.next()) {
+				list.add(rs.getString("userName"));
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return list;
+	}
+
+	@Override
+	public ArrayList<User> getUsersSortedByScore() throws SQLException {
+
+		ArrayList<User> list = new ArrayList<>();
+		String query = "SELECT * FROM hangman_user ORDER BY score DESC";
+		ResultSet rs = null;
+		
+		try (Statement st = conn.createStatement()) {
+			rs = st.executeQuery(query);
+
+			while (rs.next()) {
+				list.add(new User(rs.getString("userName"), rs.getInt("score")));
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return list;
+	}
+
+	@Override
+	public boolean isUniqueUsername(String username) throws SQLException {
+
+		boolean unique = false;
+		ArrayList<String> list = getUsernames();
+
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).equalsIgnoreCase(username))
+				;
+			unique = true;
+		}
+		return unique;
+	}
+
+	@Override
+	public User getUser(String username) throws SQLException {
+
+		User user = null;
+		String query = "SELECT * FROM hangman_user WHERE userName = ?";
+		ResultSet rs = null;
+
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setString(1, username);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				user = new User(rs.getString("userName"), rs.getString("password"), rs.getInt("score"));
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return user;
+
+	}
+
+	public void printUser(User user) {
+		if (user != null) {
+			System.out.println("username: " + user.getUserName() + ", score: " + user.getScore());
+		} else {
+			System.out.println("No user to print.");
+		}
+	}
 }
