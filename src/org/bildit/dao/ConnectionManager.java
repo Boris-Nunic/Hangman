@@ -8,7 +8,7 @@ public class ConnectionManager {
 	private static ConnectionManager instance = null;
 
 	private static final String USERNAME = "root";
-	private static final String PASSWORD = "maja";
+	private static final String PASSWORD = "lozinka";
 	private static final String CONN_STRING = "jdbc:mysql://localhost/hangman?useSSL=false&serverTimezone=UTC";
 
 	private Connection connection = null;

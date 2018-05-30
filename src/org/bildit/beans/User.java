@@ -20,6 +20,7 @@ public class User {
 	public User(String userName, String password, int score) {
 		this.userName = userName;
 		this.score = score;
+		this.password = password;
 	}
 	
 	public User(String userName, int score) {
