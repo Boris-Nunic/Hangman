@@ -14,7 +14,7 @@ import org.bildit.services.LoginService;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
+@WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,29 +31,31 @@ public class Login extends HttpServlet {
 
 		// Check if user is valid and setup an error message
 		User user = LoginService.validateLogin(username, password);
-		if (user.isOnline()) {
-
-			// Set HTTP session
-			HttpSession session = request.getSession();
-
-			// Set username as attribute
-			session.setAttribute("user", user);
-
-			if (user.isAdmin()) {
-				// Forward to admin page
-				request.getRequestDispatcher("html/placeholder1.jsp").forward(request, response);
-			}
-
-			else {
-				// Forward to user page
-				request.getRequestDispatcher("html/placeholder2.jsp").forward(request, response);
-			}
-		}
-
-		else {
-			// Return to home page
-			request.setAttribute("user", user);
-			request.getRequestDispatcher("html/placeholder.jsp").forward(request, response);
-		}
+//		if (user.isOnline()) {
+//
+//			// Set HTTP session
+//			HttpSession session = request.getSession();
+//
+//			// Set username as attribute
+//			session.setAttribute("user", user);
+//
+//			if (user.isAdmin()) {
+//				// Forward to admin page
+//				request.getRequestDispatcher("html/placeholder1.jsp").forward(request, response);
+//			}
+//
+//			else {
+//				// Forward to user page
+//				request.getRequestDispatcher("html/placeholder2.jsp").forward(request, response);
+//			}
+//		}
+//
+//		else {
+//			// Return to home page
+//			request.setAttribute("user", user);
+//			request.getRequestDispatcher("html/placeholder.jsp").forward(request, response);
+//		}
+		
+		response.getWriter().write(user.getMessage() + " " + user.isOnline() + " " + user.isAdmin());
 	}
 }

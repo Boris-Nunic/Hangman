@@ -12,7 +12,7 @@ import org.bildit.services.RegistrationService;
  * Servlet implementation class RegisterUser
  */
 
-@WebServlet("/RegisterUser")
+@WebServlet("/registerUser")
 public class RegisterUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,12 +25,15 @@ public class RegisterUser extends HttpServlet {
 		//Get parameters from login.jsp
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String pswRepeat = request.getParameter("psw_repeat");
 		
 		//Write message back to client page
-		String message = RegistrationService.register(username, password);
+		String message = RegistrationService.register(username, password, pswRepeat);
 		
-		request.setAttribute("message", message);
-		request.getRequestDispatcher("/html/placeholder.jsp");
+//		request.setAttribute("message", message);
+//		request.getRequestDispatcher("/html/placeholder.jsp");
+		
+		response.getWriter().write(message);
 		
 		
 	}

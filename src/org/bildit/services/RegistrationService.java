@@ -7,37 +7,53 @@ public class RegistrationService {
 
 	private static UserDao dao = new UserDao();
 
-	// Try to register a user and return adequate message 
-	public static String register(String username, String password) {
+	// Try to register a user and return adequate message
+	public static String register(String username, String password, String pswRepeat) {
+
+		if (invalidUsernameMessage(username) != null) {
+			return invalidUsernameMessage(username);
+		}
 		if (dao.getUsernames().contains(username)) {
 			return "Entered username is already taken";
 		}
-		
-		else if (invalidPasswordMessage(password) != null) {
+
+		if (invalidPasswordMessage(password) != null) {
 			return invalidPasswordMessage(password);
 		}
 
-		else if (EncryptionService.hashPassword(password) == null) {
+		if (!password.equals(pswRepeat)) {
+			return "Password and repeated password do not match, please try again";
+		}
+
+		if (EncryptionService.hashPassword(password) == null) {
 			return "An error has occured please try again";
 		}
 
-		else {
-			return successfulRegistration(username, password);
-		}
+		return successfulRegistration(username, password);
 	}
-	
+
 	// Encrypts password, adds user into database and returns message
 	private static String successfulRegistration(String username, String password) {
 		String encrypt = EncryptionService.hashPassword(password);
 		User user = new User(username, encrypt);
-		if(dao.addUser(user) == true) {
-		return "Your registration was successful";
+		if (dao.addUser(user) == true) {
+			return "Your registration was successful";
 		}
 		return "Registration failed";
-		
+
 	}
-	
-	// Returns message if password is not valid, else returns null 
+
+	// Returns message if user name is not valid
+	private static String invalidUsernameMessage(String username) {
+		if (!validUsername(username)) {
+			String message = "Entered username is invalid.\nUsername can only contain"
+					+ " lower and upper case letters, digits, undersores and dashes\nMust have at least 5 chars";
+			return message;
+		}
+		return null;
+	}
+
+	// Returns message if password is not valid, else returns null
 	private static String invalidPasswordMessage(String password) {
 		if (!validPassword(password)) {
 			String message = "Entered password is invalid.\nA digit must occur at least once\n"
@@ -49,7 +65,7 @@ public class RegistrationService {
 			return message;
 		}
 		return null;
-		
+
 	}
 
 	/*
@@ -62,5 +78,14 @@ public class RegistrationService {
 	private static boolean validPassword(String password) {
 		final String PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
 		return password.matches(PATTERN);
+	}
+
+	/*
+	 * Return true if username is valid Can only contain lower and upper case
+	 * letters, digits, undersores and dashes Must have at least 5 chars
+	 */
+	private static boolean validUsername(String username) {
+		final String PATTERN = "[a-zA-Z0-9_-]{5,}";
+		return username.matches(PATTERN);
 	}
 }
