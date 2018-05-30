@@ -30,7 +30,7 @@ public class RegisterUser extends HttpServlet {
 		String message = RegistrationService.register(username, password);
 		
 		request.setAttribute("message", message);
-		request.getRequestDispatcher("/html/placeholder.jsp");
+		request.getRequestDispatcher("/RegFailed.html");
 		
 		
 	}
