@@ -15,27 +15,25 @@ import org.bildit.services.RegistrationService;
 @WebServlet("/registerUser")
 public class RegisterUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
-		//Get parameters from login.jsp
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// Get parameters from login.jsp
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String pswRepeat = request.getParameter("psw_repeat");
-		
-		//Write message back to client page
+
+		// Write message back to client page
 		String message = RegistrationService.register(username, password, pswRepeat);
-		
-//		request.setAttribute("message", message);
-//		request.getRequestDispatcher("/html/placeholder.jsp");
-		
-		response.getWriter().write(message);
-		
-		
+
+		request.setAttribute("message", message);
+		request.getRequestDispatcher("/html/placeholder.jsp");
+
 	}
 
 }
