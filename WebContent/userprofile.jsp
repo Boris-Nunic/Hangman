@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="org.bildit.beans.User" %>
 <html>
 
 <head>
@@ -13,13 +14,16 @@
 <body>
 <div class="profil" >
   <h1> Wellcome </h1>
-  <h3> Username (upisati usernme od korisnika koji se ulogavao) </h3>
+  <%
+  User user =(User)session.getAttribute("user");
+  %>
+  <h3> <%=user.getUserName()%> </h3>
 
 <div class ="score">
   <table align="center" color ="black">
     <th><h4> Highest score<h4></th>
       <tr>
-        <td> 1 (score ide ovdje) </td>
+        <td> <%=user.getScore()%> </td>
       </tr>
   </table>
 </div>
