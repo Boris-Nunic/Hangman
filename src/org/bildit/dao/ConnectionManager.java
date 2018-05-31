@@ -25,13 +25,17 @@ public class ConnectionManager {
 
 	private boolean openConnection() {
 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
 			return true;
 		} catch (SQLException e) {
 			System.err.println(e);
 			return false;
-		}
-	}
+		} catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+}
 
 	public Connection getConnection() {
 		if (connection == null) {
