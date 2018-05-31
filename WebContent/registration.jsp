@@ -11,6 +11,11 @@
 </head>
 
 	<body style="background: url('img/slika.jpg');background-size:  100%;margin-bottom:  25%;">
+	<div class="message">
+	<%String message =(String)request.getAttribute("message"); %>
+	<h3><%= message %></h3>
+	</div>
+	
 	<div class="register-box">
 	<img src="img/avatar.png" class="avatar">
 
