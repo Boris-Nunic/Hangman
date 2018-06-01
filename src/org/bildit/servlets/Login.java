@@ -53,7 +53,7 @@ public class Login extends HttpServlet {
 		else {
 			// Return to home page
 			request.setAttribute("user", user);
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("loginMessage.jsp").forward(request, response);
 		}
 		
 	}

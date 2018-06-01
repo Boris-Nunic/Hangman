@@ -32,7 +32,7 @@ public class RegisterUser extends HttpServlet {
 		String message = RegistrationService.register(username, password, pswRepeat);
 
 		request.setAttribute("message", message);
-		request.getRequestDispatcher("registration.jsp").forward(request, response);
+		request.getRequestDispatcher("registrationMessage.jsp").forward(request, response);
 
 	}
 
