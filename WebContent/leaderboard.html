@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -47,8 +48,6 @@ tr:nth-child(even) {
 		</div>
 			<br>
 	
-		   <input type="button" value="NEW GAME" id="buttonStyle" onclick="window.location.href='game.html'" style="width:100%; background:red; height:40px; border-radius:25px; font-family:fantasy; font-size:20px;">
-
 	      <input type="button" value="GO BACK" id="buttonStyle" onclick="history.back()" style="width:100%; background:greenyellow; height:40px; margin-top:10px; border-radius:25px; font-family:fantasy; font-size:20px;">
 
 		</button>
@@ -57,3 +56,4 @@ tr:nth-child(even) {
 </div>
 </body>
 </html>
+
