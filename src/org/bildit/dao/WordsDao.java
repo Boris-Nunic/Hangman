@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class WordsDao implements WordsDaoInteface {
 
@@ -53,6 +54,14 @@ public class WordsDao implements WordsDaoInteface {
 			System.err.println(e);
 		}
 		return words;
+	}
+	
+	@Override
+	public String getWord() {
+		Random rand = new Random();
+		ArrayList<String> allWords = getWords();
+		int randWord = rand.nextInt(allWords.size());
+		return allWords.get(randWord);
 	}
 
 }

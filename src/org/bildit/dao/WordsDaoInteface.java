@@ -8,5 +8,7 @@ public interface WordsDaoInteface {
 	
 	public void deleteWord(String word);
 	
-	public ArrayList<String> getWords(); 
+	public ArrayList<String> getWords();
+
+	public String getWord(); 
 }

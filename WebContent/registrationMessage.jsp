@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registration Failed</title>
+    <title>Registration Message</title>
     <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
