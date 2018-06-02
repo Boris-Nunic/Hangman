@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-
+<% String message = (String)request.getAttribute("message"); %>
 <html>
 <head>
 <title>Game Message</title>
@@ -16,9 +16,7 @@
 <body>
 
 	<div class="regf">
-		<%
-			String message = (String) request.getAttribute("message");
-		%>
+		
 		<h1><%=message%></h1>
 		<a href="userprofile.jsp" class="btn btn-info" role="button">Play again</a>
 

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.bildit.beans.User;
@@ -136,9 +137,9 @@ public class UserDao implements UserDaoInterface {
 	}
 
 	@Override
-	public ArrayList<User> getUsersSortedByScore(){
+	public List<User> getUsersSortedByScore(){
 
-		ArrayList<User> list = new ArrayList<>();
+		List<User> list = new ArrayList<>();
 		String query = "SELECT * FROM hangman_user ORDER BY score DESC";
 		ResultSet rs = null;
 		

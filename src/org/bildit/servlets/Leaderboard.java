@@ -1,7 +1,8 @@
 package org.bildit.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,11 +25,11 @@ public class Leaderboard extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList<User> leaderboard = LeaderboardService.getLeaderboard();
+		List<User> leaderboard = LeaderboardService.getLeaderboard();
 
 		// Write the top 10 leader board back to client browser
 		request.setAttribute("leaderboard", leaderboard);
-		request.getRequestDispatcher("html/placeholder.jsp");
+		request.getRequestDispatcher("leaderboard.jsp").forward(request, response);
 	}
 
 }

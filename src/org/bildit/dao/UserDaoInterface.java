@@ -1,6 +1,8 @@
 package org.bildit.dao;
  
 import java.util.ArrayList;
+import java.util.List;
+
 import org.bildit.beans.User;
 
 public interface UserDaoInterface {
@@ -15,7 +17,7 @@ public interface UserDaoInterface {
 	
 	public boolean addScore(String username, int score);
 	
-	public ArrayList<User> getUsersSortedByScore();
+	public List<User> getUsersSortedByScore();
 		
 	public ArrayList<String> getUsernames(); 
 	
