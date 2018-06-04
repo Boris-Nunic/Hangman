@@ -5,7 +5,7 @@
 <%@page import="org.bildit.beans.User"%>
 <%@page import="java.util.ArrayList"%>
 <%
-	List<User> list = (ArrayList<User>) request.getAttribute("leaderboard");
+	List<User> list =(ArrayList<User>)request.getAttribute("leaderboard");
 %>
 <html>
 <head>

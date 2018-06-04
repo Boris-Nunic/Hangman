@@ -19,14 +19,14 @@ public class UserDao implements UserDaoInterface {
 	@Override
 	public boolean addUser(User user){
 		boolean added = false;
-		String query = "INSERT INTO hangman_user( userName, password, score, isAdmin) " + "VALUES (?, ?, ?, default)";
+		String query = "INSERT INTO hangman_user( userName, password, score, isAdmin) " + "VALUES (?, ?, ?, ?)";
 
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
 			ps.setString(1, user.getUserName());
 			ps.setString(2, user.getPassword());
 			ps.setInt(3, 0); // set score to 0 for every new user
-			// ps.setInt(4, 0); // tiny int in db, 0 for regular user
+			 ps.setBoolean(4, user.isAdmin()); // tiny int in db, 0 for regular user
 			// execute the query
 			int affected = ps.executeUpdate();
 			if (affected == 1) {
@@ -170,6 +170,7 @@ public class UserDao implements UserDaoInterface {
 
 			if (rs.next()) {
 				user = new User(rs.getString("userName"), rs.getString("password"), rs.getInt("score"));
+				user.setAdminStatus(rs.getBoolean("isAdmin"));
 			}
 		} catch (SQLException e) {
 			System.err.println(e);

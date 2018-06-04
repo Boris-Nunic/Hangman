@@ -68,7 +68,7 @@ public class User {
 		return isAdmin;
 	}
 
-	public void isAdmin(boolean isAdmin) {
+	public void setAdminStatus(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 

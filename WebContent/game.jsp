@@ -27,7 +27,7 @@
 				<h3>
 					<label for="word">Insert letter/word:</label>
 				</h3>
-				<input type="word" class="form-control" id="word" name="word" autofocus>
+				<input type="word" class="form-control" id="word" name="guess" autofocus>
                     <input type="submit" class="btn btn-info" value="Guess">
 			</form>
 		</div>

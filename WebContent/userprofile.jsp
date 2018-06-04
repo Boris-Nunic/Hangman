@@ -8,7 +8,8 @@
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href='https://fonts.googleapis.com/css?family=Ubuntu:500'rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:500'
+	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -42,9 +43,11 @@
 			onclick="window.location.href='leaderboard.jsp'"
 			style="WIDTH: 200px; height: 50px; background-color: #636363; border: none; color: white; padding: 15px 25px; text-align: center; font-size: 16px; cursor: pointer; border-radius: 25px; margin-bottom: 5px;">
 
-		<input type="button" value="Log Out" id="buttonStyle"
-			onclick="window.location.href='logut'"
-			style="WIDTH: 200px; height: 50px; background-color: #f5282a; border: none; color: white; padding: 15px 25px; text-align: center; font-size: 16px; cursor: pointer; border-radius: 25px; margin-bottom: 5px;">
+		<form action="logout" method="get">
+			<input type="submit" value="Log Out" id="buttonStyle"
+				style="WIDTH: 200px; height: 50px; background-color: #f5282a; border: none; color: white; padding: 15px 25px; text-align: center; font-size: 16px; cursor: pointer; border-radius: 25px; margin-bottom: 5px;">
+		</form>
+
 
 		</br>
 		</button>
