@@ -9,39 +9,21 @@
 %>
 <html>
 <head>
-
+<title>Leaderboard</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/lead.css">
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href='https://fonts.googleapis.com/css?family=Ubuntu:500'
-	rel='stylesheet' type='text/css'>
-<style>
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-td, th {
-	border: 2px solid black;
-	text-align: left;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #white;
-}
-</style>
-
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:500'rel='stylesheet' type='text/css'>
 </head>
 
 <body>
 	<div class="bord">
-		<h1>Leaderboard</h1>
+		<h1 style="text-align:center;"> Leaderboard <h1>
 		<div class="score">
-			<table align="center" color="black">
+		<div style="overflow-x:auto;">
+			<table>
 				<th></th>
 				<th>Username</th>
 				<th>Score</th>
@@ -60,14 +42,13 @@ tr:nth-child(even) {
 
 				</tr>
 			</table>
+			</div>
 		</div>
 		<br> <input type="button" value="GO BACK" id="buttonStyle"
 			onclick="history.back()"
-			style="width: 100%; background: greenyellow; height: 40px; margin-top: 10px; border-radius: 25px; font-family: fantasy; font-size: 20px;">
+			style="width: 30%; background: greenyellow; height: 40px; margin-top: 10px; border-radius: 25px; font-family: fantasy; font-size: 20px; margin-left: 33%;MARGIN-BOTTOM: 20px;">
 
 		</button>
-	</div>
-
 	</div>
 </body>
 </html>

@@ -1,0 +1,36 @@
+body {
+  	background:url('slika.jpg');
+	font-family: 'Ubuntu', sans-serif;
+	background-size: 100% 120%;
+	background-repeat:no-repeat;
+	margin-bottom:16%;
+	
+}
+
+.regf {
+	
+    width: 400px;
+    align-items: center;
+	text-align:center;
+    margin-left: 32%;
+	margin-top:6%
+}
+
+/*Media Query for responsive part*/
+@media screen and (max-width: 600px){
+body {
+	background color:orange;
+    margin-bottom: 100%;
+    background-repeat: no-repeat;
+}
+
+.regf {
+	text-align: center;
+    margin-top: 20%;
+    align-items: center;
+    margin-left: 0%;
+    margin-right: -4%;
+	margin-top:38%;
+	float:right;
+}
+}

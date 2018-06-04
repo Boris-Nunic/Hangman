@@ -6,7 +6,6 @@
 	GameService gs = new GameService();
 %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,14 +21,14 @@
 		style="padding-left: 8%; padding-top: 10%; float: left;">
 
 	<div class="game">
-
 		<div class="form-group" style="text-align: center;">
 			<!-- <form action="/game" method="POST"> -->
 			<form action="game" method="post">
 				<h3>
 					<label for="word">Insert letter/word:</label>
 				</h3>
-				<input type="text" name="guess" class="btn btn-info" value="">
+				<input type="word" class="form-control" id="word" name="word" autofocus>
+                    <input type="submit" class="btn btn-info" value="Guess">
 			</form>
 		</div>
 		<div class="form-group" style="text-align: center;">
@@ -44,12 +43,12 @@
 
 			<form action="setupGame" method="get">
 				<input type="submit" value="New Game" id="buttonStyle"
-					style="WIDTH: 100%; height: 40px; background-color: #7ef54b; border-radius: 25px; font-family: fantasy; font-size: 20px;">
+					style="width: 50%; 	background-color: #7ef54b; border-radius: 25px; font-family: fantasy; font-size: 20px;">
 			</form>
 
 			<input type="button" value="Profile" id="buttonStyle"
 				onclick="Userprofile.html"
-				style="WIDTH: 100%; height: 40px; background-color: #6285ff; border-radius: 25px; font-family: fantasy; font-size: 20px;">
+				style="width: 50%; background-color: #6285ff; border-radius: 25px; font-family: fantasy; font-size: 20px;">
 
 		</div>
 	</div>
