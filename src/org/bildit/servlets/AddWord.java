@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.bildit.services.AddWordService;
+import org.bildit.services.AdminService;
 
 /**
  * Servlet implementation class AddWord
@@ -27,9 +27,9 @@ public class AddWord extends HttpServlet {
 		
 		
 		//Write message back to client page
-		String message = AddWordService.AddNewWord(word);				
+		String message = AdminService.addWord(word);				
 		request.setAttribute("message", message);
-		request.getRequestDispatcher("html/placeholder.jsp");
+		request.getRequestDispatcher("admin.jsp").forward(request, response);
 
 	}
 

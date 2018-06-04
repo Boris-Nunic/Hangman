@@ -13,17 +13,23 @@ public class WordsDao implements WordsDaoInteface {
 	Connection conn = ConnectionManager.getInstance().getConnection();
 
 	@Override
-	public void addWord(String word) {
+	public boolean addWord(String word) {
 		String query = "INSERT INTO hangman_words(wordID, word) " + "VALUES (default, ?)";
 		// default value - it's autoincrement in db
+		boolean success = false;
 
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 			ps.setString(1, word);
-			ps.executeUpdate();
+			int rowsAffectet = ps.executeUpdate();
+			if (rowsAffectet == 1) {
+				success = true;
+			}
 
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
+		
+		return success;
 	}
 
 	@Override

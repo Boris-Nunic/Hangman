@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface WordsDaoInteface {
 
-	public void addWord(String word);
+	public boolean addWord(String word);
 	
 	public void deleteWord(String word);
 	
