@@ -19,5 +19,5 @@ public class LeaderboardService {
 			return topTen;
 		}
 
-	}	
+	}
 }

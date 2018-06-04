@@ -1,6 +1,7 @@
 package org.bildit.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -30,6 +31,6 @@ public class Leaderboard extends HttpServlet {
 		// Write the top 10 leader board back to client browser
 		request.setAttribute("leaderboard", leaderboard);
 		request.getRequestDispatcher("leaderboard.jsp").forward(request, response);
-	}
 
+	}
 }
