@@ -25,5 +25,15 @@ public class AdminService {
 		}
 		return "Action falied";
 	}
+	
+	public static String deleteWord(String word) {
+		if (!wordsDao.getWords().contains(word)) {
+			return "Entered word is not in the database";
+		}
+		if (wordsDao.deleteWord(word)) {
+			return word + " was successfully deleted from the database";
+		}
+		return "Action failed";
+	}
 
 }

@@ -14,7 +14,7 @@
 
 <div class="users">
 
-   <form method="post">
+   <form action="deleteWord" method="post">
    
 				<h1>Delete Word:</h1>
 				<div class="form-group">

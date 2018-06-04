@@ -1,4 +1,8 @@
-
+<%String message = (String)request.getAttribute("message");
+if (message == null) {
+	message = "";
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,13 +26,7 @@
 		<br> <input type="button" value="Delete Word"
 			id="btn btn-primary" onclick="window.location.href='delWord.jsp'"
 			style="WIDTH: 100%; height: 50px; background-color: #676767; border: none; color: white; padding: 15px 25px; text-align: center; font-size: 16px; cursor: pointer; border-radius: 25px; margin-bottom: 5px;">
-		<br> <input type="button" value="Add as admin"
-			id="btn btn-primary" onclick="window.location.href='AddAdmin.html'"
-			style="WIDTH: 100%; height: 50px; background-color: #160bb8; border: none; color: white; padding: 15px 25px; text-align: center; font-size: 16px; cursor: pointer; border-radius: 25px; margin-bottom: 5px;">
-		<br> <input type="button" value="Reset Leaderboard"
-			id="btn btn-primary" onclick="window.location.href='Reset.html'"
-			style="WIDTH: 100%; height: 50px; background-color: #292323; border: none; color: white; padding: 15px 25px; text-align: center; font-size: 16px; cursor: pointer; border-radius: 25px; margin-bottom: 5px;">
-
+		<br><h3><%=message%></h3>
 
 	</div>
 </body>

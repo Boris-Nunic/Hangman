@@ -37,6 +37,9 @@
 			<h3><%=game.getConcealedWord()%></h3>
 			<h3>FailedAttempts</h3>
 			<h3><%=game.getAttempts()%></h3>
+			<h3>Score:</h3>
+			<h3><%=game.getScore()%></h3>
+
 		</div>
 		<br> <br>
 		<div class="button">

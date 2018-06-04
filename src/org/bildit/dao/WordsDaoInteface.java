@@ -6,7 +6,7 @@ public interface WordsDaoInteface {
 
 	public boolean addWord(String word);
 	
-	public void deleteWord(String word);
+	public boolean deleteWord(String word);
 	
 	public ArrayList<String> getWords();
 

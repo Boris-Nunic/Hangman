@@ -26,7 +26,7 @@
 		<div class="score">
 			<table align="center" color="black">
 				<th><h4>
-						Highest score
+						Total score
 						<h4></th>
 				<tr>
 					<td><%=user.getScore()%></td>
@@ -39,9 +39,14 @@
 				style="WIDTH: 200px; height: 50px; background-color: #60ea3a; border: none; color: #000000; padding: 15px 25px; text-align: center; font-size: 16px; cursor: pointer; border-radius: 25px; margin-bottom: 5px;">
 		</form>
 
-		<input type="button" value="Leaderboard" id="buttonStyle"
-			onclick="window.location.href='leaderboard.jsp'"
-			style="WIDTH: 200px; height: 50px; background-color: #636363; border: none; color: white; padding: 15px 25px; text-align: center; font-size: 16px; cursor: pointer; border-radius: 25px; margin-bottom: 5px;">
+		<form action="userScores" method="get">
+
+			<input type="submit" value="Leaderboard" id="buttonStyle"
+
+				style="WIDTH: 200px; height: 50px; background-color: #636363; border: none; color: white; padding: 15px 25px; text-align: center; font-size: 16px; cursor: pointer; border-radius: 25px; margin-bottom: 5px;">
+
+		</form>
+
 
 		<form action="logout" method="get">
 			<input type="submit" value="Log Out" id="buttonStyle"

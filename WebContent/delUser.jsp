@@ -9,7 +9,7 @@
 		<body>
 		
 			<div class="users">
-                <form method="post">
+                <form action="deleteUser" method="post">
 				<h1>Delete User	</h1>
 				<div class="form-group">
 					<label for="username">Insert Username you want to remove:</label>

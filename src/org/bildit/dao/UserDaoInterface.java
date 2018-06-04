@@ -23,4 +23,10 @@ public interface UserDaoInterface {
 	
 	public User getUser(String username);
 	
+	public int getTotalScore(String username);
+
+	public boolean addTotalScore(String username);
+	
+	public ArrayList<Integer> getScores(String username);
+	
 }

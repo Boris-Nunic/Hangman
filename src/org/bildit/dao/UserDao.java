@@ -17,16 +17,15 @@ public class UserDao implements UserDaoInterface {
 	private static Connection conn = ConnectionManager.getInstance().getConnection();
 
 	@Override
-	public boolean addUser(User user){
+	public boolean addUser(User user) {
 		boolean added = false;
-		String query = "INSERT INTO hangman_user( userName, password, score, isAdmin) " + "VALUES (?, ?, ?, ?)";
+		String query = "INSERT INTO hangman_user(userName, password, isAdmin) " + "VALUES (?, ?, ?)";
 
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
 			ps.setString(1, user.getUserName());
 			ps.setString(2, user.getPassword());
-			ps.setInt(3, 0); // set score to 0 for every new user
-			 ps.setBoolean(4, user.isAdmin()); // tiny int in db, 0 for regular user
+			ps.setBoolean(3, user.isAdmin()); 
 			// execute the query
 			int affected = ps.executeUpdate();
 			if (affected == 1) {
@@ -68,7 +67,7 @@ public class UserDao implements UserDaoInterface {
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
 			ps.setString(1, username);
-			
+
 			int affected = ps.executeUpdate();
 			if (affected == 1) {
 				deleted = true;
@@ -80,7 +79,7 @@ public class UserDao implements UserDaoInterface {
 	}
 
 	@Override
-	public void resetLeaderboard(){
+	public void resetLeaderboard() {
 		String query = "SELECT * FROM hangman_user";
 		ResultSet rs = null;
 
@@ -99,10 +98,10 @@ public class UserDao implements UserDaoInterface {
 	}
 
 	@Override
-	public boolean addScore(String username, int score){
+	public boolean addScore(String username, int score) {
 
 		boolean added = false;
-		String query = "UPDATE hangman_user SET score = ? WHERE userName = ?";
+		String query = "INSERT INTO scores(score, username) VALUES(?, ?)";
 
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setInt(1, score);
@@ -117,6 +116,28 @@ public class UserDao implements UserDaoInterface {
 		}
 		return added;
 	}
+	
+	@Override
+	public boolean addTotalScore(String username){
+
+		boolean added = false;
+		String query = "UPDATE hangman_user SET totalScore = ? WHERE userName = ?";
+		int totalScore = getTotalScore(username);
+
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setInt(1, totalScore);
+			ps.setString(2, username);
+
+			int affected = ps.executeUpdate();
+			if (affected == 1) {
+				added = true;
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return added;
+	}
+
 
 	@Override
 	public ArrayList<String> getUsernames() {
@@ -137,17 +158,17 @@ public class UserDao implements UserDaoInterface {
 	}
 
 	@Override
-	public List<User> getUsersSortedByScore(){
+	public List<User> getUsersSortedByScore() {
 
 		List<User> list = new ArrayList<>();
-		String query = "SELECT * FROM hangman_user ORDER BY score DESC";
+		String query = "SELECT * FROM hangman_user ORDER BY totalScore DESC";
 		ResultSet rs = null;
-		
+
 		try (Statement st = conn.createStatement()) {
 			rs = st.executeQuery(query);
 
 			while (rs.next()) {
-				list.add(new User(rs.getString("userName"), rs.getInt("score")));
+				list.add(new User(rs.getString("userName"), rs.getInt("totalScore")));
 			}
 		} catch (SQLException e) {
 			System.err.println(e);
@@ -155,9 +176,8 @@ public class UserDao implements UserDaoInterface {
 		return list;
 	}
 
-
 	@Override
-	public User getUser(String username){
+	public User getUser(String username) {
 
 		User user = null;
 		String query = "SELECT * FROM hangman_user WHERE userName = ?";
@@ -169,7 +189,7 @@ public class UserDao implements UserDaoInterface {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				user = new User(rs.getString("userName"), rs.getString("password"), rs.getInt("score"));
+				user = new User(rs.getString("userName"), rs.getString("password"), rs.getInt("totalScore"));
 				user.setAdminStatus(rs.getBoolean("isAdmin"));
 			}
 		} catch (SQLException e) {
@@ -179,6 +199,30 @@ public class UserDao implements UserDaoInterface {
 
 	}
 
+	@Override
+	public int getTotalScore(String username) {
+		String query = "SELECT sum(score) FROM scores WHERE username = ?";
+		int topScore = 0;
+		ResultSet rs = null;
+
+		try (PreparedStatement ps = conn.prepareStatement(query);) {
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				topScore = rs.getInt("sum(score)");
+			}
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return topScore;
+	}
+	
+	
+
 	public void printUser(User user) {
 		if (user != null) {
 			System.out.println("username: " + user.getUserName() + ", score: " + user.getScore());
@@ -186,4 +230,24 @@ public class UserDao implements UserDaoInterface {
 			System.out.println("No user to print.");
 		}
 	}
+
+	@Override
+	public ArrayList<Integer> getScores(String username) {
+		String query = "SELECT * FROM scores WHERE username = ?";
+		ArrayList<Integer> scores = new ArrayList<>();
+		ResultSet rs = null;
+		
+		try(PreparedStatement ps = conn.prepareStatement(query);) {
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				scores.add(rs.getInt("score"));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return scores;
+	}
+	
 }

@@ -33,16 +33,22 @@ public class WordsDao implements WordsDaoInteface {
 	}
 
 	@Override
-	public void deleteWord(String word) {
+	public boolean deleteWord(String word) {
+		boolean success = false;
 		String query = "DELETE FROM hangman_words WHERE word= ?";
 		try (PreparedStatement ps = conn.prepareStatement(query);) {
 
 			ps.setString(1, word);
-			ps.executeUpdate();
+			int affected = ps.executeUpdate();
+			if (affected == 1) {
+				success = true;
+			}
 
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
+		
+		return success;
 	}
 
 	@Override

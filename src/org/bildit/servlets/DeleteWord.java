@@ -10,26 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 import org.bildit.services.AdminService;
 
 /**
- * Servlet implementation class DeleteUser
+ * Servlet implementation class DeleteWord
  */
-@WebServlet("/deleteUser")
-public class DeleteUser extends HttpServlet {
+@WebServlet("/deleteWord")
+public class DeleteWord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String word = request.getParameter("word");
 		
-		String username = request.getParameter("username");
-		
-		String message = AdminService.deleteUser(username);
+		String message = AdminService.deleteWord(word);
 		
 		request.setAttribute("message", message);
 		
 		request.getRequestDispatcher("admin.jsp").forward(request, response);
-		
-		
 	}
 
 }
