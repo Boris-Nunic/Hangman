@@ -1,0 +1,84 @@
+body {
+
+	background:url('pozz.jpg');
+	font-family: 'Ubuntu', sans-serif;
+	padding-right:27%;
+	background-repeat:no-repeat;
+	line-height:1.5;
+	font-weight:400;
+	font-size:1rem;
+}
+
+.error {
+	margin-left:120%;
+	float:right;
+	margin-top:35%;
+	
+}
+
+.register-box {
+	width: 345px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 55%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 0px 99px;
+	border-radius:25px;
+	text-align:center;
+	font-size:22px;
+}
+.avatar {
+	width:100px;
+	height:100px;
+	border-radius:50%;
+	position:absolute;
+	top:-60px;
+	left: calc(50% - 50px);
+}
+
+.form {
+	
+	
+}
+
+/*Media Query for responsive part*/ 
+@media screen and (max-width: 700px) {
+ body {
+    background:url('pozz.jpg');
+    font-family: 'Ubuntu', sans-serif;
+    background-size: auto
+	padding-left:27%;
+    padding-right: 25%;
+    background-repeat: no-repeat;
+    padding-left: 27%;
+    background-size: 100% 900px;
+ }
+ 
+ 
+.register-box {
+	width: 212px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 22px 30px;
+	border-radius:25px;
+	text-align:center;
+	font-size:15px;
+}	
+.avatar {
+	width:100px;
+	height:100px;
+	border-radius:50%;
+	position:absolute;
+	top:-50px;
+	left: calc(50% - 50px);
+}
+
+}

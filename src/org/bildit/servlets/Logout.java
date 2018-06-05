@@ -1,29 +1,28 @@
 package org.bildit.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Placeholder
+ * Servlet implementation class Logout
  */
-@WebServlet("/Placeholder")
-public class Placeholder extends HttpServlet {
+@WebServlet("/logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
+
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String htmlResponse = "<html><h2>Welcome to Servlet</h2></html>";
-		PrintWriter write = response.getWriter();
-		write.write(htmlResponse);
+		HttpSession session = request.getSession();
+		session.invalidate();
+		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 	

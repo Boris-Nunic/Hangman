@@ -1,0 +1,263 @@
+body {
+  	background:url('slika.jpg');
+	font-family: 'Ubuntu', sans-serif;
+	background-size: 100% 120%;
+	padding-left:27%;
+	padding-right:27%;
+	background-repeat:no-repeat;
+}
+
+.bord {
+	
+	margin-bottom: 100%;
+    margin-top: 10%;
+}
+
+.home {
+	padding-top:25%;
+	padding-bottom:10%;
+	margin-bottom:15%;
+}
+
+.profil {
+	padding-top:5%;
+	background-size:100% 110%;
+	padding-bottom:20%;
+	text-align:center;
+	}
+
+.admin {
+	margin-top:30%;
+	margin-bottom:30%;	
+	text-align:center;
+}
+
+.users {
+    margin-bottom: 20%;
+	margin-top:37%;
+    background-size: 100% 110%;
+    text-align: center;
+}
+
+a:hover {
+    background-color: red;
+}
+
+.wrapper h1{
+	text-align: center;
+	font-size:50px;
+	font-style: oblique;
+}
+
+.wrapper {
+	color:black;
+	margin: auto;
+    width: 70%;
+    border: 3px white;
+    text-align: center;
+    border-radius: 25px;
+	
+}
+
+.register-box {
+	width: 400px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+	border-radius:25px;
+	text-align:center;
+	font-size:25px;
+	
+}
+.avatar {
+	width:100px;
+	height:100px;
+	border-radius:50%;
+	position:absolute;
+	top:-50px;
+	left: calc(50% - 50px);
+}
+
+.Hangman {
+	font-size:45px;
+	text-align:center;
+	font-style:oblique;
+	padding-top:40%;
+}
+
+.login1 {
+	padding-top:35%;
+	padding-left:25%;
+}
+
+.register {
+	 
+    background-color: lightgray;
+    border-bottom-style: groove;
+    border-bottom-right-radius: 120px;
+    border-bottom-width: 58px;
+    border-left-style: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: center;
+    border-bottom-color: snow;
+	
+}
+.form-group {
+	font-size: 20px;
+	
+}
+
+.form {
+	display:
+	box-sizing: border-box;
+}
+
+.form-control {
+	color:white-space;
+}
+
+ table {
+	
+	font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+	border-spacing:0;
+	border:1px solid black;
+	
+}
+
+ td, th {
+	
+	border: 2px solid black;
+    text-align: center;
+    padding: 8px;
+}
+
+ tr:nth-child(even) {
+    background-color: transparent;
+	
+	}
+	
+.score {
+	text-align: center;
+	font-color: black;
+	color: black;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.score table  {
+	border: 1px solid white;
+	font-color: black;
+	color: black;
+	width:500px;
+	height:50px;
+}
+
+
+
+/*Spacing for buttons to look better in responsive mode*/
+.btn-info {
+	margin: 5px 5px 5px 5px;
+	font-size:20px;
+}
+
+
+/*Media Query for responsive part*/
+@media screen and (max-width: 700px){
+	body {
+	background color:orange;
+	background-size:100% 900px;
+    margin-bottom: 25%;
+    background-repeat: no-repeat;
+}
+
+.wrapper {
+	background-color:transparent;
+	color:#403c36;
+	margin: auto;
+	margin-top: 30%;
+    width: 50%;
+    border: 3px #403c36;
+    padding: 10px;
+    text-align: center;
+    border-style: solid;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+.wrapper h1 {
+	text-align: center;
+	font-size:10vw;
+
+}
+
+.home {
+	padding-top: 25%;
+    padding-bottom: 10%;
+	margin-bottom:15%;
+}
+
+.register-box {
+	width: 400px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+	border-radius:25px;
+	text-align:center;
+	font-size:25px;
+}
+
+table {
+	
+	font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: auto;
+	border-spacing:0;
+	border:1px solid black;
+}
+
+ td, th {
+	
+	border: 2px solid black;
+    text-align: center;
+    padding: 8px;
+	border-collapse:collapse;
+}
+
+ tr:nth-child(even) {
+    background-color: transparent;
+	
+	}
+	
+.score {
+	text-align: center;
+	font-color: black;
+	color: black;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.score table  {
+	border: 1px solid white;
+	font-color: black;
+	color: black;
+	width:100%;
+	height:50px;
+}
+.profil {
+	padding-top:5%;
+	background-size:100% 110%;
+	padding-bottom:20%;
+	text-align:center;
+	}
+ }

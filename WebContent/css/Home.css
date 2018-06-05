@@ -1,0 +1,28 @@
+body {
+  	background:url('slika.jpg');
+	font-family: 'Ubuntu', sans-serif;
+	background-size: 100% 120%;
+	padding-left:27%;
+	padding-right:27%;
+	background-repeat:no-repeat;
+}
+.home {
+	padding-top:25%;
+	padding-bottom:10%;
+	margin-bottom:15%;
+}
+
+/*Media Query for responsive part*/ 
+
+@media screen and (max-width: 600px) {
+ body {
+    background:url('pozz.jpg');
+    font-family: 'Ubuntu', sans-serif;
+    background-size: auto
+	padding-left:27%;
+    padding-right: 25%;
+    background-repeat: no-repeat;
+    padding-left: 27%;
+    background-size: 100% 900px;
+ }
+}

@@ -1,13 +1,14 @@
 package org.bildit.dao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface WordsDaoInteface {
 
-	public void addWord(String word) throws SQLException;
+	public boolean addWord(String word);
 	
-	public void deleteWord(String word) throws SQLException;
+	public boolean deleteWord(String word);
 	
-	public ArrayList<String> getWords() throws SQLException; 
+	public ArrayList<String> getWords();
+
+	public String getWord(); 
 }

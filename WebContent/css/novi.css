@@ -1,0 +1,47 @@
+body {
+ 	background:url('slika.jpg');
+	font-family: 'Ubuntu', sans-serif;
+	background-size: 100% 110%;
+	margin-bottom:5%;
+}
+
+.game {
+	
+	padding-top: 10%;
+    padding-left: 25%;
+}
+.form-group {
+	font-size: 20px;
+}
+
+.button {
+	width: 30%;
+    padding-left: 60%;
+	
+}
+
+
+/*Media Query for responsive part*/
+@media screen and (max-width: 700px){
+body {
+	background:url('slika.jpg');
+}
+
+game {
+	padding-top: 10%;
+    padding-left: 25%;
+	
+	}
+	
+.novi {
+   width: 30%;
+   padding-left: 60%;
+}	
+.button {
+    width: 120%;
+    padding-left: 60%;
+}	
+	
+	
+	
+}
