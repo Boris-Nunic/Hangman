@@ -25,7 +25,7 @@ public class LoginService {
 		
 		user = dao.getUser(username);
 		
-		if (!encrypt.equals(user.getPassword())) {
+		if (!password.equals(user.getPassword())) {
 			message = "Incorrect password. Please try again";
 			user.setMessage(message);;
 			return user;

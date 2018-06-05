@@ -50,7 +50,7 @@
 			</form>
 
 			<input type="button" value="Profile" id="buttonStyle"
-				onclick="Userprofile.html"
+				onclick="window.location.href='userprofile.jsp'"
 				style="width: 50%; background-color: #6285ff; border-radius: 25px; font-family: fantasy; font-size: 20px;">
 
 		</div>

@@ -116,7 +116,6 @@ public class GameService {
 			game.setConcealedWord("");
 			game.setNumOfErrors(0);
 			game.setScore(100);
-			game.setWord("");
 
 			return true;
 		}

@@ -35,7 +35,7 @@ public class RegistrationService {
 	// Encrypts password, adds user into database and returns message
 	private static String successfulRegistration(String username, String password) {
 		String encrypt = EncryptionService.hashPassword(password);
-		User user = new User(username, encrypt);
+		User user = new User(username, password);
 		if (dao.addUser(user) == true) {
 			return "Your registration was successful";
 		}

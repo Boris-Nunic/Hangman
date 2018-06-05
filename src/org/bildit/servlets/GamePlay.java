@@ -31,7 +31,7 @@ public class GamePlay extends HttpServlet {
 
 		if (gs.isGameWon(user.getUserName(), game)) {
 			session.removeAttribute("game");
-			message = "You Win, the correct word was: " + game.getWord();
+			message = "You Win, the correct word was:\n " + game.getWord();
 			request.setAttribute("message", message);
 
 			request.getRequestDispatcher("/gameMessage.jsp").forward(request, response);
